@@ -16,11 +16,13 @@ namespace ArtworksConsoleAppAdoNet.Repositories
     }
     public class MuseumRepository : IMuseumRepository
     {
-        private const string ConnectionString = @"Server=DESKTOP-476F63V\SQLEXPRESS; Database=Artworks; Integrated Security=true; TrustServerCertificate=True";
 
         public List<Museum>? GetByPictureName(string pictureName)
         {
-            var query = "select Museum.City\r\nfrom Artwork\r\njoin Museum on Artwork.Id_Museum = Museum.Id_Museum\r\nwhere Artwork.Name = 'Flora'";
+            var query = @"select Museum.Id_Museum, Museum.MuseumName, Museum.City
+                        from Artwork
+                        join Museum on Artwork.Id_Museum = Museum.Id_Museum
+                        where Artwork.Name = @pictureName";
             return GetMuseums(query, "@pictureName", pictureName);
         }
 
@@ -28,7 +30,7 @@ namespace ArtworksConsoleAppAdoNet.Repositories
         {
             try
             {
-                using var cn = new SqlConnection(ConnectionString);
+                using var cn = new SqlConnection(Constants.ConnectionString);
                 using var cmd = new SqlCommand(command, cn);
                 cn.Open();
                 cmd.Parameters.AddWithValue(parameterName, value);
@@ -51,7 +53,6 @@ namespace ArtworksConsoleAppAdoNet.Repositories
                 Console.Error.WriteLine(ex);
             }
             return null;
-
         }
     }
 }

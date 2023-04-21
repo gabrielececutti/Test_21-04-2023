@@ -24,7 +24,7 @@ Id_Artwork int primary key  not null,
 [Name] nvarchar(50) not null,
 Id_Museum int references Museum (Id_Museum) not null,
 Id_Artist int references Artist (Id_Artist) not null,
-Id_Character int references [Character] (Id_Character)
+Id_Character int references [Character] (Id_Character) not null
 )
 
 -- 2 FILL
@@ -55,9 +55,7 @@ values
 (4,'Il vecchio chitarrista cieco',4,3,3)
 
 -- 3 QUERIES
---Scrivere una query "select" per recuperare la lista contenete: museo, nome opera, nome 
---personaggio degli artisti italiani.
-
+--Scrivere una query "select" per recuperare la lista contenete: museo, nome opera, nome del personaggio degli artisti italiani.
 select m.MuseumName, aw.Name as ArtworkName, c.Name as CharacterName
 from Museum m
 inner join Artwork aw on m.Id_Museum = aw.Id_Museum
@@ -77,3 +75,5 @@ select Museum.City
 from Artwork
 join Museum on Artwork.Id_Museum = Museum.Id_Museum
 where Artwork.Name = 'Flora'
+
+

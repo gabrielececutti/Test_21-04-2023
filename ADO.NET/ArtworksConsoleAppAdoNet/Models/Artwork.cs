@@ -12,7 +12,7 @@ namespace ArtworksConsoleAppAdoNet.Models
         public string Name { get; set; }
         public Museum Museum { get; set; }
         public Artist Artist { get; set; }
-        public Character? Character { get; set; }
+        public Character Character { get; set; }
 
     }
 }

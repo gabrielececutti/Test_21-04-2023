@@ -9,7 +9,7 @@ namespace ArtworksConsoleAppAdoNet.Models
     public class NewModel
     {
         public Museum? Museum { get; set; }
-        public Artwork? Artwork { get; set; }
-        public Character? Character { get; set; }
+        public string? ArtworkName { get; set; }
+        public string? CharacterName { get; set; }
     }
 }
